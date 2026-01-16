@@ -4,6 +4,13 @@ pub fn dot(comptime len: comptime_int, a: @Vector(len, f64), b: @Vector(len, f64
     return @reduce(.Add, a * b);
 }
 
+pub fn oneHot(comptime len: comptime_int, idx: usize) @Vector(len, f64) {
+    std.debug.assert(idx < len);
+    var s: @Vector(len, f64) = @splat(0.0);
+    s[idx] = 1;
+    return s;
+}
+
 pub fn Mat(comptime rows: comptime_int, comptime columns: comptime_int) type {
     return struct {
         values: [rows]@Vector(columns, f64),

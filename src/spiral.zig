@@ -1,9 +1,9 @@
 const std = @import("std");
 const math = @import("math.zig");
 
-pub fn createData(comptime samples: usize, comptime classes: usize) struct { points: math.Mat(samples * classes, 2), labels: [samples * classes]u8 } {
+pub fn createData(comptime samples: usize, comptime classes: usize) struct { points: math.Mat(samples * classes, 2), labels: [samples * classes]usize } {
     var X = math.Mat(samples * classes, 2){ .values = undefined };
-    var y: [samples * classes]u8 = undefined;
+    var y: [samples * classes]usize = undefined;
 
     var prng = std.Random.DefaultPrng.init(0);
     const random = prng.random();
@@ -44,4 +44,3 @@ test "createData" {
     try std.testing.expectEqual(0, data.labels[0]);
     try std.testing.expectEqual(2, data.labels[299]);
 }
-
